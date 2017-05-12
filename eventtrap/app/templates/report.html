@@ -1,0 +1,11 @@
+<html>
+	<head>
+	</head>
+	<body>
+		<table border=1>
+			{% for i in data[0] %}
+			<tr><td>{{ i['title'] }}</td><td>{{ i['computer'] }}</td><td>{{ i['date'] }}</td><td>{{ i['time'] }}</td></tr>
+			{% endfor %}
+		</table>
+	</body>
+</html>
