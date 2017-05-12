@@ -4,7 +4,7 @@ from sqlmodel import event
 
 @app.route('/', methods = ['GET'])
 def home():
-    return render_template('home.html')
+    return render_template('base.html')
 
 @app.route('/eventtrap/api/v1.0/events', methods=['POST'])
 def create_task():
