@@ -1,6 +1,7 @@
 from app import app, db
 from flask import render_template, flash, redirect, request, json, jsonify, abort
 from sqlmodel import event, eventSchema
+from datetime import datetime, date
 
 @app.route('/', methods = ['GET'])
 def home():
@@ -21,6 +22,13 @@ def create_event():
 @app.route('/eventtrap/api/v1.0/events', methods=['GET'])
 def get_events():
     events = event.query.all()
+    events_schema = eventSchema(many=True)
+    result = events_schema.dump(events)        
+    return jsonify(result)
+
+@app.route('/eventtrap/api/v1.0/events/today', methods=['GET'])
+def get_events_today():
+    events = event.query.filter(event.date == date.today()).all()
     events_schema = eventSchema(many=True)
     result = events_schema.dump(events)        
     return jsonify(result)
