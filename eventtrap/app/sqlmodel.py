@@ -1,4 +1,4 @@
-from app import db
+from app import db, ma
 from datetime import datetime
 from sqlalchemy.sql.elements import Null
 #from sqlalchemy.orm import backref, relationship
@@ -16,4 +16,6 @@ class event(db.Model):
         self.computer = computer
         self.datetime = datetime.now()
         
-        
+class eventSchema(ma.ModelSchema):
+    class Meta:
+        model = event
