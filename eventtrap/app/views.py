@@ -1,7 +1,9 @@
 from app import app, db
-from flask import render_template, flash, redirect, request, json, jsonify, abort
+from flask import render_template, flash, redirect, request, json, jsonify, abort, url_for, render_template
 from sqlmodel import event, eventSchema
 from datetime import datetime, date
+import requests
+from config import hostname
 
 @app.route('/', methods = ['GET'])
 def home():
@@ -32,3 +34,19 @@ def get_events_today():
     events_schema = eventSchema(many=True)
     result = events_schema.dump(events)        
     return jsonify(result)
+
+@app.route('/eventtrap/report', methods=['GET'])
+def today_report():
+    #uri = url_for('get_events_today')
+    #url = 'http://'+hostname+uri
+    uri = "http://eventtrap.gssmp.local/eventtrap/api/v1.0/events/today"
+    try:
+        uResponse = requests.get(uri)
+    except requests.ConnectionError:
+        return "Connection Error"  
+    Jresponse = uResponse.text
+    data = json.loads(Jresponse)
+    
+    return  render_template('report.html', data = data)
+    #return uri
+    
