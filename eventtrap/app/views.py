@@ -14,7 +14,8 @@ def create_event():
     if not request.json or not 'title' or not 'computer' in request.json:
         abort(400)
     e = event(title = request.json['title'],
-              computer = request.json['computer'])
+              computer = request.json['computer'],
+              status = request.json['status'])
     if 'category' in request.json:
         e.category = request.json['category']
     db.session.add(e)
