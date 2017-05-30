@@ -13,7 +13,7 @@ class event(db.Model):
     date = db.Column(db.Date)
     time = db.Column(db.Time)
     
-    def __init__(self, title, computer, status = 'info'):
+    def __init__(self, title, computer, status):
         self.title = title
         self.computer = computer
         self.status = status
