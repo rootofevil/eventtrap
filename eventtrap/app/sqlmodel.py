@@ -8,13 +8,15 @@ class event(db.Model):
     title = db.Column(db.String(50))
     category = db.Column(db.String(50))
     computer = db.Column(db.String(20))
+    status = db.Column(db.String(12))
     description = db.Column(db.String(250))
     date = db.Column(db.Date)
     time = db.Column(db.Time)
     
-    def __init__(self, title, computer):
+    def __init__(self, title, computer, status = 'info'):
         self.title = title
         self.computer = computer
+        self.status = status
         self.date = date.today()
         self.time = datetime.now().time()
         
