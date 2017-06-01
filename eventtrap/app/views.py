@@ -31,7 +31,7 @@ def get_events():
 
 @app.route('/eventtrap/api/v1.0/events/today', methods=['GET'])
 def get_events_today():
-    events = event.query.filter(event.date == date.today() and event.status != 'info').all()
+    events = event.query.filter(event.date == date.today(), event.status != "info").all()
     events_schema = eventSchema(many=True)
     result = events_schema.dump(events)        
     return jsonify(result)
